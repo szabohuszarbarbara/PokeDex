@@ -1,19 +1,19 @@
 const express = require('express');
 const authController = express.Router();
-const user = require("../model/userModel");
+const User = require("../model/userModel");
 const bcrypt = require("bcryptjs");
 const authService = require("../service/authService.js");
 
 authController.post("/register", async (req, res) => {
     const { username, email, password } = req.body;
-    const userExistsByEmail = await user.findOne({ email });
-    const userExistsByUsername = await user.findOne({ email });
+    const userExistsByEmail = await User.findOne({ email });
+    const userExistsByUsername = await User.findOne({ email });
     if (userExistsByEmail || userExistsByUsername ) {
         return res.status(409).send("User Already Exist. Please Login");
     }
     const encryptedPassword = await bcrypt.hash(password, 10);
 
-    await user.create({
+    await User.create({
         username,
         email: email.toLowerCase(), 
         password: encryptedPassword,
@@ -23,8 +23,12 @@ authController.post("/register", async (req, res) => {
   });
   
   authController.post("/login", async (req, res) => {
-    
-
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    if (user && (await bcrypt.compare(password, user.password))) {
+        return res.status(200).send("Successfully logged in");
+    }
+    return res.status(400).send("Invalid Credentials");
   });
 
   module.exports = authController;
