@@ -1,0 +1,18 @@
+const express = require('express');
+const authController = express.Router();
+const user = require("../model/userModel");
+const bcrypt = require("bcryptjs");
+const authService = require("../service/authService.js");
+
+authController.post("/register", async (req, res) => {
+    res.status(200).json(req.body);
+    const { username, email, password } = req.body;
+  
+
+  });
+  
+  authController.post("/login", async (req, res) => {
+
+  });
+
+  module.exports = authController;
