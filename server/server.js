@@ -1,9 +1,11 @@
+require("dotenv").config();
+require("./config/database").connect();
 
 const express = require("express")
 const app = express()
 
-
-const port = 3000
+const { API_PORT } = process.env;
+const port = API_PORT;
 
 app.get("/", (req, res) => {
     res.status(200).json("Hello")
