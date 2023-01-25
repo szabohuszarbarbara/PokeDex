@@ -1,0 +1,25 @@
+.header-container {
+    background: #d02424;
+    height: 220px;
+    width: 100%;
+}
+.header-image {
+    margin-left: 40px;
+}
+
+.header-image img{
+    width: 400px;
+    height:auto;
+}
+.search-box {
+    margin-left: 40px;
+}
+@media screen and (max-width: 440px) {
+    .header-image img{
+        width: 80vw;
+        height:auto;
+    }
+    .header-image {
+        margin-left: 10vw;
+    }
+}

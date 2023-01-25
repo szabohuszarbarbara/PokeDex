@@ -1,0 +1,80 @@
+.card-container {
+    width: 80vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 1rem 5vw 3rem;
+    padding: 0;
+    position: relative;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 150px;
+    height: auto;
+    cursor: grab;
+    border-radius: 20%;
+    box-shadow: 10px 10px 5px #d5d5d5;
+    background-repeat: no-repeat;
+    background-position: unset;
+}
+.red {
+    background-image: linear-gradient(to bottom, #ff1f83, #d13531);
+}
+.green {
+    background-image: linear-gradient(to bottom, #ade179, #3e7a39);
+}
+.blue {
+    background-image: linear-gradient(to bottom, #4af1e3, #1465be);
+}
+.yellow {
+    background-image: linear-gradient(to bottom, rgba(248, 245, 77, 0.89), #ecba16);
+}
+.white {
+    background-image: linear-gradient(to bottom, rgba(245, 245, 245, 0.89), #e1e1e1);
+}
+.brown {
+    background-image: linear-gradient(to bottom, rgb(201, 138, 20), #794f01);
+}
+.purple {
+    background-image: linear-gradient(to bottom, rgb(147, 81, 246), #5804a6);
+}
+.pink {
+    background-image: linear-gradient(to bottom, rgb(238, 164, 215), #c451ba);
+}
+.gray{
+    background-image: linear-gradient(to bottom, rgb(161, 160, 160), #525252);
+}
+.card:hover {
+    transform: scale(1.1);
+}
+.card-image {
+    display: flex;
+    align-self: center;
+    margin-bottom: 5px;
+    transform: scale(1.2);
+    margin-top: 20px;
+}
+.card-name {
+    display: flex;
+    justify-content: center;
+}
+.card-id {
+    padding-left: 10px;
+    padding-bottom: 5px;
+    color: white;
+    text-shadow: 3px 3px rgba(0,0,0,1);
+}
+.card-tag {
+    border-radius: 12%;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+}
+.close-modal {
+    transform: scale(2);
+}

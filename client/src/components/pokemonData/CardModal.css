@@ -1,0 +1,81 @@
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 220px;
+    height: 420px;
+    color: black;
+    z-index: 10;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    background-color: white;
+    position: fixed;
+    padding: 20px;
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    background-position: unset;
+}
+.close-modal {
+    cursor: grab;
+    align-self: flex-end;
+    margin: 5px;
+    color:black;
+}
+.stripe {
+    border-radius: inherit;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 120px;
+}
+.modal-image-container {
+    position: absolute;
+    margin: auto;
+    top: 60px;
+    right: 0;
+    left: 0;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: white;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-image {
+    transform: scale(1.5);
+}
+.modal-attributes {
+    margin-top: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.modal-name {
+    top: 200px;
+    align-self: center;
+    font-size: 24px;
+    color: #1a1a1a;
+}
+.modal-id {
+    font-size: 14px;
+    align-self: center;
+}
+.modal-text {
+    align-self: flex-start;
+}
