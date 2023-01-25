@@ -2,7 +2,8 @@ const express = require('express');
 const authController = express.Router();
 const User = require("../model/userModel");
 const bcrypt = require("bcryptjs");
-const authService = require("../service/authService.js");
+const createJWT = require("../middleware/jwt.js");
+const jwt = require('jsonwebtoken');
 
 authController.post("/register", async (req, res) => {
     const { username, email, password } = req.body;
@@ -18,7 +19,7 @@ authController.post("/register", async (req, res) => {
         email: email.toLowerCase(), 
         password: encryptedPassword,
       });
-    
+
     res.status(200).json({username, password});
   });
   
@@ -26,9 +27,11 @@ authController.post("/register", async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     if (user && (await bcrypt.compare(password, user.password))) {
-        return res.status(200).send("Successfully logged in");
+        accessToken = jwt.sign({ username: username, email: user.email }, process.env.JWT_SECRET);
+        return res.status(200).json({user, accessToken });
     }
-    return res.status(400).send("Invalid Credentials");
+
+    return res.status(400).send("Invalid credentials");
   });
 
   module.exports = authController;
