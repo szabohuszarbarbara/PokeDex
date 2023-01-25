@@ -22,7 +22,7 @@ function LoginModal(props) {
             'username': username,
             'password': password
         };
-        const user = await getUserData('/login', payload);
+        const user = await getUserData('/auth/login', payload);
         if (user.accessToken) {
             localStorage.setItem("user", JSON.stringify(user));
             setUser(user);
@@ -37,7 +37,7 @@ function LoginModal(props) {
             'password': password,
             'email': email
         }
-        const registeredUser = await getUserData('/register', payload);
+        const registeredUser = await getUserData('/auth/register', payload);
         if (registeredUser) {
             await clickLogin(e);
         }
