@@ -1,8 +1,10 @@
 const express = require('express');
 const authController = express.Router();
+const {login, register} = require("../service/authService.js")
 const User = require("../model/userModel");
+const Token = require("../model/tokenModel");
 const bcrypt = require("bcryptjs");
-const createJWT = require("../middleware/jwt.js");
+
 const jwt = require('jsonwebtoken');
 
 authController.post("/register", async (req, res) => {
@@ -27,11 +29,22 @@ authController.post("/register", async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     if (user && (await bcrypt.compare(password, user.password))) {
-        accessToken = jwt.sign({ username: username, email: user.email }, process.env.JWT_SECRET);
-        return res.status(200).json({user, accessToken });
+        accessToken = jwt.sign({username: username, email: user.email }, process.env.JWT_SECRET, {expiresIn: "10s"});
+        refreshToken = jwt.sign({username: username, email: user.email}, process.env.JWT_REFRESH_SECRET, { expiresIn: '1d' });
+        Token.create({
+          id: user._id,
+          username: username,
+          refreshToken
+        })
+
+        res.cookie('jwt', { httpOnly: true, 
+            sameSite: 'None', secure: true, 
+            maxAge: 24 * 60 * 60 * 1000 });
+
+        return res.status(200).json({refreshToken, accessToken});
     }
 
-    return res.status(400).send("Invalid credentials");
+    return res.status(400).json({message : "Invalid credentials"});
   });
 
   module.exports = authController;
