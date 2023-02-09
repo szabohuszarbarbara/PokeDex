@@ -1,37 +1,11 @@
 const express = require('express');
 const authController = express.Router();
-const User = require("../model/userModel");
-const bcrypt = require("bcryptjs");
-const createJWT = require("../middleware/jwt.js");
-const jwt = require('jsonwebtoken');
+const authService = require("../service/authService");
 
-authController.post("/register", async (req, res) => {
-    const { username, email, password } = req.body;
-    const userExistsByEmail = await User.findOne({ email });
-    const userExistsByUsername = await User.findOne({ email });
-    if (userExistsByEmail || userExistsByUsername ) {
-        return res.status(409).send("User Already Exist. Please Login");
-    }
-    const encryptedPassword = await bcrypt.hash(password, 10);
+authController.route("/register")
+  .post(authService.register);
 
-    await User.create({
-        username,
-        email: email.toLowerCase(), 
-        password: encryptedPassword,
-      });
+authController.route("/login")
+  .post(authService.login);
 
-    res.status(200).json({username, password});
-  });
-  
-  authController.post("/login", async (req, res) => {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
-    if (user && (await bcrypt.compare(password, user.password))) {
-        accessToken = jwt.sign({ username: username, email: user.email }, process.env.JWT_SECRET);
-        return res.status(200).json({user, accessToken });
-    }
-
-    return res.status(400).send("Invalid credentials");
-  });
-
-  module.exports = authController;
+module.exports = authController;

@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import ProfileData from "../components/profile/ProfileData";
 
 function Profile(props) {
     return (
@@ -9,7 +10,7 @@ function Profile(props) {
             <br/>
             <br/>
             <br/>
-            PROFILE
+            <ProfileData />
             <br/>
             <br/>
             <br/>

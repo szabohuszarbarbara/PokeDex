@@ -23,6 +23,9 @@ function LoginModal(props) {
             'password': password
         };
         const user = await getUserData('/auth/login', payload);
+        if (user.refreshToken) {
+            console.log("RT")
+        }
         if (user.accessToken) {
             localStorage.setItem("user", JSON.stringify(user));
             setUser(user);
