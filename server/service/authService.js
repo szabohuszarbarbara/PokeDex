@@ -40,7 +40,7 @@ const login =  async (req, res) => {
           sameSite: 'None', secure: true, 
           maxAge: 24 * 60 * 60 * 1000 });
 
-      return res.status(200).json({refreshToken, accessToken});
+      return res.status(200).json({refreshToken, accessToken, username});
   }
 
   return res.status(400).json({message : "Invalid credentials"});
